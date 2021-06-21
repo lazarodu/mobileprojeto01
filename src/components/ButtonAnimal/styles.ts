@@ -2,14 +2,16 @@ import styled from 'styled-components/native'
 import colors from '../../styles/colors'
 
 export const ButtonStyle = styled.TouchableOpacity`
-  background-color: ${colors.brown};
+  background-color: ${colors.brownLight};
   border-radius: 5px;
-  margin-top: 10px;
+  margin: 20px;
 `
 export const ButtonStyleText = styled.Text`
-  color: ${colors.white};
+  color: ${colors.black};
   font-weight: bold;
   text-align: center;
   padding: 10px;
-  font-size: 18px;
+`
+export const ImageStyle = styled.Image`
+  margin: 10px;
 `
