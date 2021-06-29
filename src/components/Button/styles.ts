@@ -1,10 +1,21 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 import colors from '../../styles/colors'
+import { ButtonStyleProps } from "../../interfaces/ButtonStyle.interface"
 
-export const ButtonStyle = styled.TouchableOpacity`
+const sizeVariations = {
+  default: css`
+  `,
+  define: css`
+    width: 120px;
+  `
+}
+
+export const ButtonStyle = styled.TouchableOpacity<ButtonStyleProps>`
   background-color: ${colors.brown};
   border-radius: 5px;
   margin-top: 10px;
+
+  ${(props) => sizeVariations[props.size || "default"]};
 `
 export const ButtonStyleText = styled.Text`
   color: ${colors.white};
