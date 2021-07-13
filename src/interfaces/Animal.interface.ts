@@ -5,4 +5,9 @@ export interface AnimalProps {
   title: string
   image: ImageSourcePropType
   castracao: string
+  vacinacao: {
+    id: number
+    nome: string
+    data: string
+  }[]
 }
