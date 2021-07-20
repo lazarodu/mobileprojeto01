@@ -13,43 +13,23 @@ export default function Animal() {
     route.params as AnimalProps;
   const navigation = useNavigation();
   function handleCastraAnimal() {
-    navigation.navigate("Castra", { title, image, castracao });
+    navigation.navigate("Castra", { title, image });
   }
   function handleVacinaAnimal() {
-    navigation.navigate("Castra");
+    navigation.navigate("Vacina", { title, image });
   }
-  function CastraEdit() {
-    navigation.navigate("Login");
+  function castraEdit() {
+    navigation.navigate("Castra", { title, image, data: castracao });
   }
-  function VacinaEdit() {
-    navigation.navigate("Login");
+  function vacinaEdit(item: VacinaParamProps) {
+    navigation.navigate("Vacina", { title, image, ...item });
   }
-  const castraRemoveAlert = () =>
-    Alert.alert(
-      "Remoção",
-      "Tem certeza que deseja remover a data de castração?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-        },
-        { text: "OK", onPress: () => console.log(id, castracao) },
-      ],
-      { cancelable: false }
-    );
-  const vacinaRemoveAlert = (item: VacinaParamProps) =>
-    Alert.alert(
-      "Remoção",
-      "Tem certeza que deseja remover a vacina cadastrada?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-        },
-        { text: "OK", onPress: () => console.log(item) },
-      ],
-      { cancelable: false }
-    );
+  function castraRemove() {
+    console.log("Castra", { title, image, data: castracao });
+  }
+  function vacinaRemove(item: VacinaParamProps) {
+    console.log("Vacina", { title, image, ...item });
+  }
 
   return (
     <Container>
@@ -57,15 +37,15 @@ export default function Animal() {
       <Castracao
         title="Castração"
         onPress={handleCastraAnimal}
-        buttonEdit={CastraEdit}
-        buttonRemove={castraRemoveAlert}
+        buttonEdit={castraEdit}
+        buttonRemove={castraRemove}
         data={castracao}
       />
       <Vacinacao
         title="Vacinação"
         onPress={handleVacinaAnimal}
-        buttonEdit={VacinaEdit}
-        buttonRemove={vacinaRemoveAlert}
+        buttonEdit={vacinaEdit}
+        buttonRemove={vacinaRemove}
         vacinacao={vacinacao}
       />
     </Container>

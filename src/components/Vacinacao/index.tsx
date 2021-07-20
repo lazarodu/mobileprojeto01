@@ -1,6 +1,9 @@
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
-import { VacinaProps } from "../../interfaces/Vacina.interface";
+import {
+  VacinaParamProps,
+  VacinaProps,
+} from "../../interfaces/Vacina.interface";
 import ButtonAction from "../ButtonAction";
 import {
   VacinaContainer,
@@ -11,6 +14,7 @@ import {
 } from "./styles";
 import colors from "../../styles/colors";
 import Button from "../Button";
+import { Alert } from "react-native";
 
 export default function Vacinacao({
   title,
@@ -20,6 +24,25 @@ export default function Vacinacao({
   onPress,
   ...rest
 }: VacinaProps) {
+  const vacinaRemoveAlert = (item: VacinaParamProps) =>
+    Alert.alert(
+      "Remoção",
+      "Tem certeza que deseja remover a vacina cadastrada?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            console.log(item);
+            buttonRemove(item);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   return (
     <VacinaContainer>
       <VacinaHeader>{title}</VacinaHeader>
@@ -29,12 +52,16 @@ export default function Vacinacao({
             <VacinaText>{item.nome}</VacinaText>
             <VacinaText>{item.data}</VacinaText>
             <VacinaButton>
-              <ButtonAction type="edit" onPress={buttonEdit} {...rest}>
+              <ButtonAction
+                type="edit"
+                onPress={() => buttonEdit(item)}
+                {...rest}
+              >
                 <FontAwesome name="edit" color={colors.white} />
               </ButtonAction>
               <ButtonAction
                 type="remove"
-                onPress={() => buttonRemove(item)}
+                onPress={() => vacinaRemoveAlert(item)}
                 {...rest}
               >
                 <FontAwesome name="remove" color={colors.white} />

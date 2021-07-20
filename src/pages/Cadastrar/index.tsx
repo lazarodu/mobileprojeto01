@@ -1,27 +1,21 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
-import {
-  Container,
-  FormRow,
-  Label,
-  TextInput,
-  Title,
-  Form,
-} from "../styles/Login";
-import { Button, ButtonText } from "../components";
+import { Container, FormRow, Label, TextInput, Title, Form } from "./style";
+import { Button, ButtonText } from "../../components";
 
-export default function Login() {
+export default function Cadastrar() {
   const navigation = useNavigation();
-  function handleCadastrar() {
-    navigation.navigate("Cadastrar");
-  }
-  function handleHome() {
-    navigation.navigate("HomeStack");
+  function handleLogin() {
+    navigation.navigate("Login");
   }
   return (
     <Container>
       <Form>
         <Title>Adopted</Title>
+        <FormRow>
+          <Label>Nome</Label>
+          <TextInput placeholder="nome"></TextInput>
+        </FormRow>
         <FormRow>
           <Label>E-mail</Label>
           <TextInput placeholder="e-mail"></TextInput>
@@ -30,8 +24,8 @@ export default function Login() {
           <Label>Senha</Label>
           <TextInput placeholder="senha"></TextInput>
         </FormRow>
-        <Button title="Login" onPress={handleHome} />
-        <ButtonText title="Cadastre-se" onPress={handleCadastrar} />
+        <Button title="Salvar" onPress={handleLogin} />
+        <ButtonText title="Voltar" onPress={handleLogin} />
       </Form>
     </Container>
   );

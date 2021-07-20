@@ -11,6 +11,7 @@ import {
 } from "./styles";
 import colors from "../../styles/colors";
 import Button from "../Button";
+import { Alert } from "react-native";
 
 export default function Castracao({
   title,
@@ -20,6 +21,25 @@ export default function Castracao({
   onPress,
   ...rest
 }: CastraProps) {
+  const castraRemoveAlert = () =>
+    Alert.alert(
+      "Remoção",
+      "Tem certeza que deseja remover a data de castração?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+        },
+        {
+          text: "OK",
+          onPress: () => {
+            console.log("Ok Pressed");
+            buttonRemove();
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   return (
     <CastraContainer>
       <CastraHeader>{title}</CastraHeader>
@@ -29,7 +49,7 @@ export default function Castracao({
           <ButtonAction type="edit" onPress={buttonEdit} {...rest}>
             <FontAwesome name="edit" color={colors.white} />
           </ButtonAction>
-          <ButtonAction type="remove" onPress={buttonRemove} {...rest}>
+          <ButtonAction type="remove" onPress={castraRemoveAlert} {...rest}>
             <FontAwesome name="remove" color={colors.white} />
           </ButtonAction>
         </CastraButton>
